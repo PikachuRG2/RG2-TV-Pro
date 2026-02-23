@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Painel Admin</title>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<script src="firebase.js"></script>
+</head>
+<body>
+
+<h2>Painel Admin</h2>
+
+<input id="nome" placeholder="Nome do Canal">
+<select id="categoria">
+<option value="esportes">Esportes</option>
+<option value="tv">TV</option>
+</select>
+<input id="link" placeholder="Link m3u8">
+<button onclick="salvar()">Salvar</button>
+
+<script>
+function salvar(){
+db.collection("canais").add({
+  nome: nome.value,
+  categoria: categoria.value,
+  link: link.value
+});
+alert("Canal salvo!");
+}
+</script>
+
+</body>
+</html>
