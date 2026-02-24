@@ -2,52 +2,83 @@ body{
   margin:0;
   background:#111;
   color:#fff;
-  font-family:Arial;
+  font-family:Arial, sans-serif;
 }
 
+/* HEADER */
 header{
   background:#000;
-  padding:15px;
+  padding:20px;
   text-align:center;
-  font-size:20px;
+  font-size:24px;
 }
 
+/* PLAYER */
 .player{
   width:100%;
-  height:220px;
+  height:60vh;
   background:black;
 }
 
 video{
   width:100%;
   height:100%;
+  object-fit:cover;
 }
 
+/* BOTÕES CATEGORIA */
 .categorias{
   display:flex;
   justify-content:center;
-  gap:10px;
-  padding:15px;
+  gap:20px;
+  padding:20px;
+  flex-wrap:wrap;
 }
 
 button{
-  padding:10px 15px;
+  padding:15px 30px;
+  font-size:18px;
   border:none;
-  border-radius:20px;
+  border-radius:30px;
   cursor:pointer;
 }
 
+/* LISTA DE CANAIS */
 #lista{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-  gap:10px;
-  padding:15px;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+  padding:20px;
 }
 
 .canal{
   background:#222;
-  padding:15px;
-  border-radius:10px;
+  padding:25px;
+  border-radius:15px;
   text-align:center;
+  font-size:18px;
   cursor:pointer;
+  transition:0.3s;
+}
+
+/* EFEITO FOCO (IMPORTANTE PARA TV) */
+.canal:focus,
+button:focus{
+  outline:3px solid #00ffcc;
+  background:#333;
+}
+
+/* RESPONSIVO CELULAR */
+@media(max-width:600px){
+  .player{
+    height:250px;
+  }
+  button{
+    padding:10px 20px;
+    font-size:16px;
+  }
+  .canal{
+    padding:15px;
+    font-size:16px;
+  }
 }
