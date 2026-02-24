@@ -61,4 +61,30 @@ function assistir(link){
     video.play();
   }
 }
+window.__onGCastApiAvailable = function(isAvailable) {
+  if (isAvailable) {
+    initializeCastApi();
+  }
+};
+
+function initializeCastApi() {
+  cast.framework.CastContext.getInstance().setOptions({
+    receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
+    autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
+  });
+}
+
+document.getElementById("castBtn").addEventListener("click", () => {
+  const context = cast.framework.CastContext.getInstance();
+  context.requestSession().then(() => {
+    const session = context.getCurrentSession();
+    const mediaInfo = new chrome.cast.media.MediaInfo(
+      document.getElementById("video").src,
+      'video/mp4'
+    );
+
+    const request = new chrome.cast.media.LoadRequest(mediaInfo);
+    session.loadMedia(request);
+  });
+});
 
