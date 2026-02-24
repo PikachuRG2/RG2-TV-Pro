@@ -28,9 +28,10 @@ function carregar(cat){
   db.collection("canais")
   .where("categoria","==",cat)
   .get()
-  .then(function(snapshot){
-    snapshot.forEach(function(doc){
-      var c = doc.data();
+ .then((snapshot) => {
+
+      snapshot.forEach((doc) => {
+        const c = doc.data(); // 👈 ESSA LINHA É OBRIGATÓRIA
       lista.innerHTML += `
       <div class="canal" onclick="assistir('${c.link}')">
         ${c.nome}
@@ -38,6 +39,12 @@ function carregar(cat){
     });
   });
 }
+
+snapshot.forEach((doc) => {
+   const c = doc.data();
+   console.log(c.nome);
+});
+
 
 function assistir(link){
   var video = document.getElementById("video");
