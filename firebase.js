@@ -1,7 +1,7 @@
 var firebaseConfig = {
-  apiKey: "SUA_API_KEY",
-  authDomain: "SEU_DOMINIO.firebaseapp.com",
-  projectId: "SEU_PROJECT_ID",
+  apiKey: "AIzaSyCI8ArQt-1KgPjue7hROhGIKa-m8cF90a4",
+  authDomain: "rg2-tv-pro.firebaseapp.com",
+  projectId: "rg2-tv-pro",
 };
 
 firebase.initializeApp(firebaseConfig);
