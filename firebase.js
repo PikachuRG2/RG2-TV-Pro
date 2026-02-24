@@ -1,7 +1,7 @@
 var firebaseConfig = {
-  apiKey: "AIzaSyCI8ArQt-1KgPjue7hROhGIKa-m8cF90a4",
-  authDomain: "rg2-tv-pro.firebaseapp.com",
-  projectId: "rg2-tv-pro",
+  apiKey: "SUA_API_KEY",
+  authDomain: "SEU_DOMINIO.firebaseapp.com",
+  projectId: "SEU_PROJECT_ID",
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -10,18 +10,17 @@ var auth = firebase.auth();
 var db = firebase.firestore();
 
 function login(){
-  const provider = new firebase.auth.GoogleAuthProvider();
-
-  firebase.auth().signInWithPopup(provider)
-    .then((result) => {
-      console.log("Logado:", result.user.email);
-      window.location.href = "index.html";
-    })
-    .catch((error) => {
-      console.error("Erro no login:", error);
-      alert("Erro ao fazer login");
-    });
+  var provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider);
 }
+
+auth.onAuthStateChanged(function(user){
+  if(user){
+    document.getElementById("loginArea").style.display="none";
+    document.getElementById("app").style.display="block";
+  }
+});
+
 function carregar(cat){
   var lista = document.getElementById("lista");
   lista.innerHTML="";
@@ -29,10 +28,9 @@ function carregar(cat){
   db.collection("canais")
   .where("categoria","==",cat)
   .get()
- .then((snapshot) => {
-
-      snapshot.forEach((doc) => {
-        const c = doc.data(); // 👈 ESSA LINHA É OBRIGATÓRIA
+  .then(function(snapshot){
+    snapshot.forEach(function(doc){
+      var c = doc.data();
       lista.innerHTML += `
       <div class="canal" onclick="assistir('${c.link}')">
         ${c.nome}
@@ -41,12 +39,6 @@ function carregar(cat){
   });
 }
 
-snapshot.forEach((doc) => {
-   const c = doc.data();
-   console.log(c.nome);
-});
-
-
 function assistir(link){
   var video = document.getElementById("video");
 
@@ -54,14 +46,7 @@ function assistir(link){
     var hls = new Hls();
     hls.loadSource(link);
     hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED, function() {
-      video.play();
-    });
-  } else {
+  }else{
     video.src = link;
-    video.play();
   }
 }
-  });
-});
-
