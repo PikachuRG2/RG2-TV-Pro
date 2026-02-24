@@ -52,5 +52,9 @@ function assistir(link){
   } else {
     video.src = link;
     video.play();
+
+    function irJogos(){
+  window.location.href = "https://zappingatvapp.blogspot.com/2025/09/canais-esportivos.html?m=1";
+}
   }
 }
