@@ -46,7 +46,11 @@ function assistir(link){
     var hls = new Hls();
     hls.loadSource(link);
     hls.attachMedia(video);
-  }else{
+    hls.on(Hls.Events.MANIFEST_PARSED, function() {
+      video.play();
+    });
+  } else {
     video.src = link;
+    video.play();
   }
 }
