@@ -16,19 +16,18 @@
 
 <body>
 
-<header>📺 RG2 TV PRO 📺</header>
+<header>📺RG2 TV PRO📺</header>
 
 <div id="loginArea">
 <button onclick="login()">Entrar com Google</button>
 </div>
+
 <div id="app" style="display:none;">
 
 <div class="player">
 <video id="video" controls></video>
 </div>
-<button id="castBtn" style="position:absolute;right:20px;top:20px;z-index:999;">
-📡 Transmitir/TV
-</button>
+
 <div class="categorias">
 <button onclick="carregar('esportes')">Esportes</button>
 <button onclick="carregar('tv')">TV</button>
@@ -39,10 +38,7 @@
 </div>
 
 <script src="firebase.js"></script>
-<button onclick="login()">Entrar</button>
 
-<script src="firebase.js"></script>
-</body>
 <script>
 if("serviceWorker" in navigator){
   navigator.serviceWorker.register("sw.js");
