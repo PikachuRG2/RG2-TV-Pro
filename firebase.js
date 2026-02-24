@@ -10,17 +10,18 @@ var auth = firebase.auth();
 var db = firebase.firestore();
 
 function login(){
-  var provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider);
+  const provider = new firebase.auth.GoogleAuthProvider();
+
+  firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+      console.log("Logado:", result.user.email);
+      window.location.href = "index.html";
+    })
+    .catch((error) => {
+      console.error("Erro no login:", error);
+      alert("Erro ao fazer login");
+    });
 }
-
-auth.onAuthStateChanged(function(user){
-  if(user){
-    document.getElementById("loginArea").style.display="none";
-    document.getElementById("app").style.display="block";
-  }
-});
-
 function carregar(cat){
   var lista = document.getElementById("lista");
   lista.innerHTML="";
