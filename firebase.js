@@ -80,7 +80,7 @@ document.getElementById("castBtn").addEventListener("click", () => {
     const session = context.getCurrentSession();
     const mediaInfo = new chrome.cast.media.MediaInfo(
       document.getElementById("video").src,
-      'video/mp4'
+      ''application/x-mpegURL''
     );
 
     const request = new chrome.cast.media.LoadRequest(mediaInfo);
