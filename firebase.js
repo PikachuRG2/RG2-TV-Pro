@@ -23,8 +23,10 @@ auth.onAuthStateChanged(function(user){
 
 function carregar(cat){
   var lista = document.getElementById("lista");
-  lista.innerHTML="";
-
+  lista.innerHTML += `
+<div class="canal" onclick="assistir('${c.link}')">
+${c.nome}
+</div>`;
   db.collection("canais")
   .where("categoria","==",cat)
   .get()
