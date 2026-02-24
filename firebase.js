@@ -21,27 +21,22 @@ auth.onAuthStateChanged(function(user){
   }
 });
 
-function carregar(categoria){
-  const lista = document.getElementById("lista");
-  lista.innerHTML = "";
+function carregar(cat){
+  var lista = document.getElementById("lista");
+  lista.innerHTML="";
 
   db.collection("canais")
-    .where("categoria", "==", categoria)
-    .get()
-    .then((snapshot) => {
-
-      snapshot.forEach((doc) => {
-        const c = doc.data(); // 👈 ESSA LINHA É OBRIGATÓRIA
-
-        lista.innerHTML += `
-          <div class="canal" tabindex="0"
-            onclick="assistir('${c.link}')">
-            ${c.nome}
-          </div>
-        `;
-      });
-
+  .where("categoria","==",cat)
+  .get()
+  .then(function(snapshot){
+    snapshot.forEach(function(doc){
+      var c = doc.data();
+      lista.innerHTML += `
+      <div class="canal" onclick="assistir('${c.link}')">
+        ${c.nome}
+      </div>`;
     });
+  });
 }
 
 function assistir(link){
@@ -51,11 +46,8 @@ function assistir(link){
     var hls = new Hls();
     hls.loadSource(link);
     hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED, function() {
-      video.play();
-    });
-  } else {
+  }else{
     video.src = link;
-    video.play();
   }
 }
+
