@@ -46,16 +46,31 @@ snapshot.forEach((doc) => {
 });
 
 
+var hls;
+
 function assistir(link){
   var video = document.getElementById("video");
 
+  // Se já existir player anterior, destruir
+  if(hls){
+    hls.destroy();
+  }
+
   if(Hls.isSupported()){
-    var hls = new Hls();
+    hls = new Hls({
+      maxBufferLength: 10,        // menor buffer = inicia mais rápido
+      maxMaxBufferLength: 20,
+      startLevel: -1,
+      liveSyncDurationCount: 3    // mais rápido em canais ao vivo
+    });
+
     hls.loadSource(link);
     hls.attachMedia(video);
+
     hls.on(Hls.Events.MANIFEST_PARSED, function() {
       video.play();
     });
+
   } else {
     video.src = link;
     video.play();
