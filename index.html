@@ -16,34 +16,30 @@
 
 <body>
 
-<header>📺 RG2 TV PRO 📺</header>
+<body>
 
-<div id="loginArea">
-<button onclick="login()">Entrar com Google</button>
-</div>
+<div class="container">
 
-<div id="app" style="display:none;">
+  <!-- MENU LATERAL -->
+  <div class="sidebar">
+    <h2>📺RG2 TV PRO📺</h2>
+    <button onclick="carregar('esportes')" tabindex="0">Esportes</button>
+    <button onclick="carregar('tv')" tabindex="0">TV</button>
+  </div>
 
-<div class="player">
-<video id="video" controls></video>
-</div>
+  <!-- CONTEÚDO -->
+  <div class="main">
 
-<div class="categorias">
-<button onclick="carregar('esportes')">Esportes</button>
-<button onclick="carregar('tv')">TV</button>
-</div>
+    <div class="player">
+      <video id="video" controls autoplay muted playsinline></video>
+    </div>
 
-<div id="lista"></div>
+    <div id="lista" class="lista"></div>
+
+  </div>
 
 </div>
 
 <script src="firebase.js"></script>
 
-<script>
-if("serviceWorker" in navigator){
-  navigator.serviceWorker.register("sw.js");
-}
-</script>
-
 </body>
-</html>
