@@ -21,24 +21,27 @@ auth.onAuthStateChanged(function(user){
   }
 });
 
-function carregar(cat){
-  var lista = document.getElementById("lista");
- lista.innerHTML += `
-<div class="canal" tabindex="0" onclick="assistir('${c.link}')">
-${c.nome}
-</div>`;
+function carregar(categoria){
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
+
   db.collection("canais")
-  .where("categoria","==",cat)
-  .get()
-  .then(function(snapshot){
-    snapshot.forEach(function(doc){
-      var c = doc.data();
-      lista.innerHTML += `
-      <div class="canal" onclick="assistir('${c.link}')">
-        ${c.nome}
-      </div>`;
+    .where("categoria", "==", categoria)
+    .get()
+    .then((snapshot) => {
+
+      snapshot.forEach((doc) => {
+        const c = doc.data(); // 👈 ESSA LINHA É OBRIGATÓRIA
+
+        lista.innerHTML += `
+          <div class="canal" tabindex="0"
+            onclick="assistir('${c.link}')">
+            ${c.nome}
+          </div>
+        `;
+      });
+
     });
-  });
 }
 
 function assistir(link){
