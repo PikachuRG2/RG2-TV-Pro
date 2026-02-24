@@ -5,18 +5,54 @@ body{
   font-family:Arial, sans-serif;
 }
 
-/* HEADER */
-header{
+/* LAYOUT PRINCIPAL */
+.container{
+  display:flex;
+  height:100vh;
+}
+
+/* MENU LATERAL */
+.sidebar{
+  width:220px;
   background:#000;
   padding:20px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.sidebar h2{
   text-align:center;
-  font-size:24px;
+}
+
+.sidebar button{
+  padding:15px;
+  font-size:18px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  background:#222;
+  color:#fff;
+  transition:0.3s;
+}
+
+.sidebar button:hover,
+.sidebar button:focus{
+  background:#00cc99;
+  color:#000;
+  outline:none;
+}
+
+/* CONTEÚDO DIREITA */
+.main{
+  flex:1;
+  display:flex;
+  flex-direction:column;
 }
 
 /* PLAYER */
 .player{
-  width:100%;
-  height:60vh;
+  height:60%;
   background:black;
 }
 
@@ -26,59 +62,50 @@ video{
   object-fit:cover;
 }
 
-/* BOTÕES CATEGORIA */
-.categorias{
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  padding:20px;
-  flex-wrap:wrap;
-}
-
-button{
-  padding:15px 30px;
-  font-size:18px;
-  border:none;
-  border-radius:30px;
-  cursor:pointer;
-}
-
 /* LISTA DE CANAIS */
-#lista{
+.lista{
+  flex:1;
+  overflow-y:auto;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:15px;
   padding:20px;
 }
 
 .canal{
   background:#222;
-  padding:25px;
-  border-radius:15px;
+  padding:20px;
+  border-radius:12px;
   text-align:center;
-  font-size:18px;
   cursor:pointer;
+  font-size:18px;
   transition:0.3s;
 }
 
-/* EFEITO FOCO (IMPORTANTE PARA TV) */
-.canal:focus,
-button:focus{
-  outline:3px solid #00ffcc;
-  background:#333;
+.canal:hover,
+.canal:focus{
+  background:#00cc99;
+  color:#000;
+  outline:none;
 }
 
 /* RESPONSIVO CELULAR */
-@media(max-width:600px){
+@media(max-width:800px){
+  .container{
+    flex-direction:column;
+  }
+
+  .sidebar{
+    width:100%;
+    flex-direction:row;
+    justify-content:center;
+  }
+
+  .main{
+    height:auto;
+  }
+
   .player{
     height:250px;
-  }
-  button{
-    padding:10px 20px;
-    font-size:16px;
-  }
-  .canal{
-    padding:15px;
-    font-size:16px;
   }
 }
