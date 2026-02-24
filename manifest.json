@@ -1,8 +1,7 @@
 {
-  "name": "RG2 TV PRO",
+  "name": "TV PRO",
   "short_name": "TV",
   "display": "standalone",
-  "orientation": "landscape",
   "start_url": "index.html",
   "background_color": "#000000",
   "theme_color": "#000000"
