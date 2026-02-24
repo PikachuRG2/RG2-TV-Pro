@@ -23,8 +23,8 @@ auth.onAuthStateChanged(function(user){
 
 function carregar(cat){
   var lista = document.getElementById("lista");
-  lista.innerHTML += `
-<div class="canal" onclick="assistir('${c.link}')">
+ lista.innerHTML += `
+<div class="canal" tabindex="0" onclick="assistir('${c.link}')">
 ${c.nome}
 </div>`;
   db.collection("canais")
