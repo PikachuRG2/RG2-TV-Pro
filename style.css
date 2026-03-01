@@ -5,6 +5,27 @@ body{
   font-family:Arial, sans-serif;
 }
 
+/* LOGIN AREA */
+#loginArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh; /* Ocupa quase a tela toda para centralizar verticalmente */
+}
+
+#loginArea button {
+  background: #4285F4;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+
+#loginArea button:hover {
+  background: #357ae8;
+  transform: scale(1.05);
+}
+
 /* HEADER */
 header{
   background:#000;
