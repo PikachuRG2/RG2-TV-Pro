@@ -1,7 +1,12 @@
-var firebaseConfig = {
-  apiKey: "AIzaSyCI8ArQt-1KgPjue7hROhGIKa-m8cF90a4",
-  authDomain: "rg2-tv-pro.firebaseapp.com",
-  projectId: "rg2-tv-pro",
+const firebaseConfig = { 
+  apiKey: "AIzaSyCI8ArQt-1KgPjue7hROhGIKa-m8cF90a4", 
+  authDomain: "rg2-tv-pro.firebaseapp.com", 
+  databaseURL: "https://rg2-tv-pro-default-rtdb.firebaseio.com", 
+  projectId: "rg2-tv-pro", 
+  storageBucket: "rg2-tv-pro.firebasestorage.app", 
+  messagingSenderId: "265320226498", 
+  appId: "1:265320226498:web:bfc8b9a719f5ae17c0e55b", 
+  measurementId: "G-C2SMB1CDZ8" 
 };
 
 firebase.initializeApp(firebaseConfig);
