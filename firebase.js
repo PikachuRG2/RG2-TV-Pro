@@ -16,7 +16,17 @@ var db = firebase.firestore();
 
 function login(){
   var provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider);
+  
+  // Se o popup (signInWithPopup) continuar dando erro de COOP, 
+  // você pode trocar por signInWithRedirect(provider) abaixo:
+  auth.signInWithPopup(provider).catch(function(error) {
+    console.error("Erro no login:", error);
+    if(error.code === 'auth/popup-blocked') {
+      alert("O seu navegador bloqueou o popup. Por favor, libere os popups para este site.");
+    } else {
+      alert("Erro ao fazer login: " + error.message);
+    }
+  });
 }
 
 auth.onAuthStateChanged(function(user){
@@ -33,23 +43,26 @@ function carregar(cat){
   db.collection("canais")
   .where("categoria","==",cat)
   .get()
- .then((snapshot) => {
+  .then((snapshot) => {
+    if (snapshot.empty) {
+      console.log("Nenhum canal encontrado para a categoria:", cat);
+      lista.innerHTML = "<p>Nenhum canal encontrado.</p>";
+      return;
+    }
 
-      snapshot.forEach((doc) => {
-        const c = doc.data(); // 👈 ESSA LINHA É OBRIGATÓRIA
+    snapshot.forEach((doc) => {
+      const c = doc.data();
       lista.innerHTML += `
       <div class="canal" onclick="assistir('${c.link}')">
         ${c.nome}
       </div>`;
     });
+  })
+  .catch((error) => {
+    console.error("Erro ao carregar canais:", error);
+    lista.innerHTML = "<p>Erro ao carregar canais. Verifique o console.</p>";
   });
 }
-
-snapshot.forEach((doc) => {
-   const c = doc.data();
-   console.log(c.nome);
-});
-
 
 var hls;
 
