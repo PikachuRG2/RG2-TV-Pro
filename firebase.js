@@ -1,7 +1,7 @@
 var firebaseConfig = {
-  apiKey: "AIzaSyCI8ArQt-1KgPjue7hROhGIKa-m8cF90a4",
-  authDomain: "rg2-tv-pro.firebaseapp.com",
-  projectId: "rg2-tv-pro",
+  apiKey: "SUA_API_KEY",
+  authDomain: "SEU_DOMINIO.firebaseapp.com",
+  projectId: "SEU_PROJECT_ID",
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -28,10 +28,9 @@ function carregar(cat){
   db.collection("canais")
   .where("categoria","==",cat)
   .get()
- .then((snapshot) => {
-
-      snapshot.forEach((doc) => {
-        const c = doc.data(); // 👈 ESSA LINHA É OBRIGATÓRIA
+  .then(function(snapshot){
+    snapshot.forEach(function(doc){
+      var c = doc.data();
       lista.innerHTML += `
       <div class="canal" onclick="assistir('${c.link}')">
         ${c.nome}
@@ -40,39 +39,14 @@ function carregar(cat){
   });
 }
 
-snapshot.forEach((doc) => {
-   const c = doc.data();
-   console.log(c.nome);
-});
-
-
-var hls;
-
 function assistir(link){
   var video = document.getElementById("video");
 
-  // Se já existir player anterior, destruir
-  if(hls){
-    hls.destroy();
-  }
-
   if(Hls.isSupported()){
-    hls = new Hls({
-      maxBufferLength: 10,        // menor buffer = inicia mais rápido
-      maxMaxBufferLength: 20,
-      startLevel: -1,
-      liveSyncDurationCount: 3    // mais rápido em canais ao vivo
-    });
-
+    var hls = new Hls();
     hls.loadSource(link);
     hls.attachMedia(video);
-
-    hls.on(Hls.Events.MANIFEST_PARSED, function() {
-      video.play();
-    });
-
-  } else {
+  }else{
     video.src = link;
-    video.play();
   }
 }
