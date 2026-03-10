@@ -66,19 +66,28 @@ function carregar(cat){
 
 var hls;
 
-function assistir(link)
-  <video
-id="player"
-class="video-js vjs-default-skin"
-controls
-autoplay
-width="100%"
-height="400"
-data-setup='{}'>
+function assistir(link){
+  var video = document.getElementById("video");
 
-<source id="source" src="" type="application/x-mpegURL">
+  // Se já existir player anterior, destruir
+  if(hls){
+    hls.destroy();
+  }
 
-</video>
+  if(Hls.isSupported()){
+    hls = new Hls({
+      maxBufferLength: 10,        // menor buffer = inicia mais rápido
+      maxMaxBufferLength: 20,
+      startLevel: -1,
+      liveSyncDurationCount: 3    // mais rápido em canais ao vivo
+    });
+
+    hls.loadSource(link);
+    hls.attachMedia(video);
+
+    hls.on(Hls.Events.MANIFEST_PARSED, function() {
+      video.play();
+    });
 
   } else {
     video.src = link;
